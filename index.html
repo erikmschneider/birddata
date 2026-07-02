@@ -11,7 +11,7 @@
 :root{
   --paper:#F5F6F2; --panel:#FCFCFA; --ink:#1B241E; --muted:#5E6B62; --faint:#8B968C;
   --line:#DEE2D8; --line-strong:#C9CFC2;
-  --fw-esa:#B23A48; --fw-mbta:#4A6B8A; --fw-cms:#A8792F; --fw-cites:#8A5A2E; --fw-bcc:#3E6D9C; --fw-sgcn:#7A5C9E;
+  --fw-esa:#B23A48; --fw-mbta:#4A6B8A; --fw-cms:#A8792F; --fw-cites:#8A5A2E; --fw-bcc:#3E6D9C; --fw-sgcn:#7A5C9E; --fw-shore:#A65335; --fw-water:#2B5D8A; --fw-wb:#A85A41; --fw-pf:#8E3B46;
   --fw-iucn:#566A72; --fw-r2r:#1F8A80; --fw-wl:#6E8B3D; --fw-tp:#3F6B4E;
   --ns-g1:#8E2F44; --ns-g2:#B5642E; --ns-g3:#A98F33; --ns-g4:#5C8A4C; --ns-g5:#2E6F63; --ns-gx:#3A3A3A; --ns-gu:#8B968C;
   --r2r-red:#B23A48; --r2r-orange:#C8763A; --r2r-yellow:#B59F2E;
@@ -29,6 +29,9 @@ a{color:var(--accent-soft)}
 header.top{padding:18px 26px 14px;border-bottom:1px solid var(--line);background:var(--panel)}
 .titler{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
 h1{font-family:var(--serif);font-weight:600;font-size:25px;letter-spacing:-.01em;margin:0}
+#hometitle{cursor:pointer;transition:color .12s}
+#hometitle:hover{color:var(--accent)}
+#hometitle:focus-visible{outline:2px solid var(--accent-soft);outline-offset:3px;border-radius:3px}
 h1 .sci{font-style:italic;color:var(--accent-soft);font-weight:500}
 .sub{color:var(--muted);font-size:13px;max-width:62ch;margin:4px 0 0}
 .statstrip{display:flex;gap:26px;margin-top:13px;flex-wrap:wrap}
@@ -70,7 +73,7 @@ aside{width:264px;flex:none;border-right:1px solid var(--line);background:var(--
 .toolbar .count{font-family:var(--mono);color:var(--ink)}
 .toolbar .sortinfo{margin-left:auto}
 .tablewrap{flex:1;overflow:auto}
-table{border-collapse:separate;border-spacing:0;table-layout:fixed;width:1048px;font-size:12.5px}
+table{border-collapse:separate;border-spacing:0;table-layout:fixed;width:1046px;font-size:12.5px}
 thead th{position:sticky;top:0;z-index:5;background:var(--panel);border-bottom:1px solid var(--line-strong);font-weight:600;color:var(--muted);font-size:11px;letter-spacing:.03em;padding:0;height:32px;vertical-align:bottom}
 .grouphead th{height:22px;top:0;z-index:6;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);font-size:9.5px;font-weight:600;text-align:center;border-bottom:none;padding-top:5px;background:var(--panel);white-space:normal;line-height:1.15;overflow:visible}
 thead tr.cols th{top:22px}
@@ -87,6 +90,14 @@ th.cnt{position:sticky;left:42px;z-index:7;width:92px;padding:0 10px 8px;backgro
 th.name{position:sticky;left:134px;z-index:7;padding:0 10px 8px 4px;background:var(--panel);min-width:230px}
 .grouphead th.idx,.grouphead th.cnt,.grouphead th.name{position:sticky;z-index:8;background:var(--panel)}
 .grouphead th.gsp{background:var(--panel)}
+.grouphead th.gsp.hideable{cursor:pointer;transition:background .12s,color .12s}
+.grouphead th.gsp.hideable:hover{background:#E2E7DC;color:var(--ink)}
+.grouphead th.gsp.hideable::after{content:'✕';margin-left:4px;font-size:8px;opacity:.4}
+.grouphead th.gsp.hideable:hover::after{opacity:.8}
+.hiddenpills{display:flex;flex-wrap:wrap;gap:6px;padding:8px 18px;border-bottom:1px solid var(--line);background:var(--paper)}
+.hiddenpills:empty{display:none;padding:0;border-bottom:none}
+.hpill{display:inline-flex;align-items:center;padding:4px 10px;border:1px dashed var(--line-strong);border-radius:20px;font-size:11.5px;color:var(--muted);cursor:pointer;background:var(--panel);user-select:none;transition:border-color .12s,color .12s}
+.hpill:hover{border-color:var(--accent);color:var(--accent)}
 
 tbody td{border-bottom:1px solid var(--line);padding:0;height:33px}
 tbody tr{cursor:pointer}
@@ -117,16 +128,29 @@ th.thc[data-s="pg"],td.pgcell{border-left:1px solid var(--line)}
 .usfschip{font-family:var(--mono);font-size:12px;min-width:24px;height:21px;display:inline-flex;align-items:center;justify-content:center;border-radius:5px;padding:0 4px;background:rgba(89,83,122,.14);color:#514A82;font-weight:700}
 .ccschip{font-family:var(--mono);font-size:11px;min-width:26px;height:21px;display:inline-flex;align-items:center;justify-content:center;border-radius:5px;padding:0 5px;color:var(--ink);font-weight:500}
 .ccschip.wl{border-left:3px solid var(--fw-wl);padding-left:3px}
+.acadchip{font-family:var(--mono);font-size:11px;min-width:26px;height:21px;display:inline-flex;align-items:center;justify-content:center;border-radius:5px;padding:0 5px;font-weight:500}
 .nschip{font-family:var(--mono);font-size:11px;min-width:26px;height:21px;display:inline-flex;align-items:center;justify-content:center;border-radius:5px;padding:0 5px;font-weight:500}
 .pgcell{text-align:center}
 .pgchip{font-family:var(--mono);font-size:11px;min-width:30px;height:21px;display:inline-flex;align-items:center;justify-content:center;border-radius:5px;padding:0 6px;font-weight:600}
 th.thc[data-s="cms"],td.fwcell[data-col="cms"]{border-left:1px solid var(--line-strong)}
 th.thc[data-s="stateEsaCount"],td.fwcell[data-col="stateEsaCount"]{border-left:1px solid var(--line-strong)}
 th.thc[data-s="iucn"],td.fwcell[data-col="iucn"]{border-left:1px solid var(--line-strong)}
+th.thc[data-s="ccs"],td.fwcell.ccscol{border-left:1px solid var(--line-strong)}
+th.thc[data-s="water"],td.fwcell[data-col="water"]{border-left:1px solid var(--line)}
 
-footer.legend{display:flex;gap:14px;flex-wrap:wrap;padding:7px 18px;border-top:1px solid var(--line);background:var(--panel);font-size:11px;color:var(--muted);align-items:center}
+.legendpanel{border-top:1px solid var(--line);background:var(--panel);color:var(--muted);flex:none}
+.legendpanel summary{cursor:pointer;list-style:none;padding:6px 18px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--faint);font-weight:600}
+.legendpanel summary::-webkit-details-marker{display:none}
+.legendpanel summary::after{content:'+';float:right;font-family:var(--mono);font-size:12px;color:var(--faint)}
+.legendpanel[open] summary::after{content:'-'}
+.legend{display:flex;gap:10px;flex-wrap:wrap;padding:0 18px 7px;font-size:10.5px;color:var(--muted);align-items:center}
 .lg{display:inline-flex;align-items:center;gap:5px}
 .lg .sw{width:10px;height:10px;border-radius:3px}
+
+@media (max-width: 900px){
+  .legendpanel summary{padding:5px 14px;font-size:10px}
+  .legend{padding:0 14px 6px;font-size:10px;gap:8px}
+}
 
 /* profile */
 .scrim{position:fixed;inset:0;background:rgba(27,36,30,.34);opacity:0;pointer-events:none;transition:opacity .2s;z-index:20}
@@ -175,7 +199,7 @@ footer.legend{display:flex;gap:14px;flex-wrap:wrap;padding:7px 18px;border-top:1
 <div class="app">
   <header class="top">
     <div class="titler">
-      <h1>Bird Conservation Status Explorer</h1>
+      <h1 id="hometitle" role="button" tabindex="0" title="Return home — clear all filters and search">Bird Conservation Status Explorer</h1>
       <button class="btn ghost menubtn" id="menubtn" style="width:auto;padding:5px 11px">Filters</button>
     </div>
     <p class="sub">Explore the conservation status of bird species in the U.S. and Western Hemisphere by their legal protections and priority lists at the federal, state, and international levels, along with NGO status lists and rankings, populations trends, and priority gap-score that ranks current protections against threat levels.</p>
@@ -197,7 +221,7 @@ footer.legend{display:flex;gap:14px;flex-wrap:wrap;padding:7px 18px;border-top:1
       </div>
       <div class="fgroup">
         <h3>Minimum frameworks</h3>
-        <div class="minrow"><input type="range" id="minc" min="0" max="6" value="0"><span class="count" id="mincval" style="font-family:var(--mono);min-width:14px">0</span></div>
+        <div class="minrow"><input type="range" id="minc" min="0" max="9" value="0"><span class="count" id="mincval" style="font-family:var(--mono);min-width:14px">0</span></div>
       </div>
       <div class="fgroup">
         <h3>Group</h3>
@@ -220,10 +244,14 @@ footer.legend{display:flex;gap:14px;flex-wrap:wrap;padding:7px 18px;border-top:1
         <span><span class="count" id="nshown">0</span> species shown</span>
         <span class="sortinfo">Sorted by <b id="sortlab">framework count</b> <span style="color:var(--faint);font-size:11px;margin-left:8px">· click a header to cycle ↓ ↑ off</span></span>
       </div>
+      <div class="hiddenpills" id="hiddenpills"></div>
       <div class="tablewrap">
         <table id="matrix"><thead id="thead"></thead><tbody id="tbody"></tbody></table>
       </div>
-      <footer class="legend" id="legend"></footer>
+      <details class="legendpanel">
+        <summary>Legend</summary>
+        <div class="legend" id="legend"></div>
+      </details>
     </div>
   </div>
 </div>
@@ -257,6 +285,464 @@ DATA.forEach(r=>{if(ATLAS_GUILDS[r.id])r.grp=ATLAS_GUILDS[r.id];r.sgcnStates=ATL
 // The population-trend fields are BBS total population change estimates:
 // core (1966–2024 era) for long term and expanded (1993–2024) for short term.
 DATA.forEach(r=>{r.lt=r.bbs?bbsTotal(r):null;r.st=r.bbs93?bbs93Total(r):null;});
+const SHORE_LEVELS={
+ ESA:{rank:5,code:'E',label:'ESA-listed',color:'#B23A48'},
+ Greatest:{rank:4,code:'G',label:'Greatest Concern',color:'#A63B41'},
+ High:{rank:3,code:'H',label:'High Concern',color:'#C97935'},
+ Moderate:{rank:2,code:'M',label:'Moderate Concern',color:'#B59A34'},
+ Least:{rank:1,code:'L',label:'Least Concern',color:'#4D7A46'},
+};
+const WATERFOWL_LEVELS={
+ High:{rank:3,code:'H',label:'High Priority',color:'#2B5D8A'},
+ Med:{rank:2,code:'M',label:'Medium Priority',color:'#4C7F88'},
+ Low:{rank:1,code:'L',label:'Low Priority',color:'#6C8E66'},
+};
+const WATERBIRD_LEVELS={
+ HI:{rank:6,code:'HI',label:'Highly Imperiled',color:'#8E2F44'},
+ H:{rank:5,code:'H',label:'High Concern',color:'#B5642E'},
+ M:{rank:4,code:'M',label:'Moderate Concern',color:'#B59A34'},
+ L:{rank:3,code:'L',label:'Low Concern',color:'#5C8A4C'},
+ N:{rank:2,code:'N',label:'Not Currently At Risk',color:'#4F718A'},
+ IL:{rank:1,code:'IL',label:'Information Lacking',color:'#7B8380'},
+};
+const PIF_LEVELS={
+ R:{rank:4,code:'Red',label:'RECOVER: Red Watch List',color:'#8E3B46'},
+ D:{rank:3,code:'D',label:'REVERSE DECLINE: "D" Yellow Watch List',color:'#D3AE2B'},
+ ND:{rank:2,code:'R',label:'PREVENT DECLINE: "R" Yellow Watch List',color:'#E0C85A'},
+ C:{rank:1,code:'C',label:'Common Birds in Steep Decline - STABILIZE Populations',color:'#8B5E3C'},
+};
+const WATERFOWL_PLAN={
+ "Steller's Eider":{level:'High',score:11,scope:'Listed species in Table 3'},
+ "Spectacled Eider":{level:'High',score:10.5,scope:'Listed species in Table 3'},
+ "Hawaiian Duck":{level:'High',score:10,scope:'Listed species in Table 3'},
+ "Laysan Duck":{level:'High',score:10,scope:'Listed species in Table 3'},
+ "Northern Pintail":{level:'High',score:10.5},
+ "Mottled Duck":{level:'High',score:10},
+ "King Eider":{level:'High',score:10},
+ "Cinnamon Teal":{level:'High',score:9},
+ "American Black Duck":{level:'High',score:9},
+ "Lesser Scaup":{level:'High',score:9},
+ "Long-tailed Duck":{level:'High',score:9},
+ "Mallard":{level:'High',score:9},
+ "American Wigeon":{level:'Med',score:8},
+ "Black Scoter":{level:'Med',score:8},
+ "Barrow's Goldeneye":{level:'Med',score:8,scope:'Both Eastern and Western populations total 8 in Table 3'},
+ "Common Eider":{level:'Med',score:7.5},
+ "Greater Scaup":{level:'Med',score:7.5},
+ "White-winged Scoter":{level:'Med',score:7.5},
+ "Gadwall":{level:'Med',score:7},
+ "Masked Duck":{level:'Med',score:7},
+ "Blue-winged Teal":{level:'Med',score:7},
+ "Green-winged Teal":{level:'Med',score:7},
+ "Surf Scoter":{level:'Med',score:7},
+ "Common Merganser":{level:'Med',score:7},
+ "Red-breasted Merganser":{level:'Med',score:7},
+ "Canvasback":{level:'Med',score:6.5},
+ "Bufflehead":{level:'Med',score:6.5},
+ "Common Goldeneye":{level:'Med',score:6.5},
+ "Harlequin Duck":{level:'Low',score:6,scope:'Both Eastern and Western populations total 6 in Table 3'},
+ "Redhead":{level:'Low',score:6},
+ "Fulvous Whistling-Duck":{level:'Low',score:6},
+ "Mexican Duck":{level:'Low',score:6},
+ "Wood Duck":{level:'Low',score:6},
+ "Northern Shoveler":{level:'Low',score:5.5},
+ "Ring-necked Duck":{level:'Low',score:5.5},
+ "Black-bellied Whistling-Duck":{level:'Low',score:5.5},
+ "Hooded Merganser":{level:'Low',score:5},
+};
+const WATERBIRD_SCOPE={NA:'North America',WH:'Western Hemisphere',NH:'Northern Hemisphere',CO:'Cosmopolitan',PE:'Peripheral'};
+const WATERBIRD_PLAN={
+ "Ashy Storm-Petrel":{level:'HI',scope:WATERBIRD_SCOPE.NA},
+ "Newell's Shearwater":{level:'HI',scope:WATERBIRD_SCOPE.NA},
+ "Townsend's Shearwater":{level:'HI',scope:WATERBIRD_SCOPE.NA},
+ "Black-capped Petrel":{level:'HI',scope:WATERBIRD_SCOPE.WH},
+ "Hawaiian Petrel":{level:'HI',scope:WATERBIRD_SCOPE.WH},
+ "Black-footed Albatross":{level:'HI',scope:WATERBIRD_SCOPE.NH},
+ "Audubon's Shearwater":{level:'HI',scope:WATERBIRD_SCOPE.CO},
+ "Band-rumped Storm-Petrel":{level:'HI',scope:WATERBIRD_SCOPE.CO},
+ "Phoenix Petrel":{level:'HI',scope:WATERBIRD_SCOPE.PE},
+ "Tahiti Petrel":{level:'HI',scope:WATERBIRD_SCOPE.PE},
+ "Polynesian Storm-Petrel":{level:'HI',scope:WATERBIRD_SCOPE.PE},
+ "Bermuda Petrel":{level:'H',scope:WATERBIRD_SCOPE.NA},
+ "Black-vented Shearwater":{level:'H',scope:WATERBIRD_SCOPE.NA},
+ "Brandt's Cormorant":{level:'H',scope:WATERBIRD_SCOPE.NA},
+ "Craveri's Murrelet":{level:'H',scope:WATERBIRD_SCOPE.NA},
+ "Kittlitz's Murrelet":{level:'H',scope:WATERBIRD_SCOPE.NA},
+ "Least Storm-Petrel":{level:'H',scope:WATERBIRD_SCOPE.NA},
+ "Xantus's Murrelet":{level:'H',scope:WATERBIRD_SCOPE.NA},
+ "Guadalupe Murrelet":{level:'H',scope:WATERBIRD_SCOPE.NA,note:"Listed as Xantus's Murrelet in Table 2"},
+ "Scripps's Murrelet":{level:'H',scope:WATERBIRD_SCOPE.NA,note:"Listed as Xantus's Murrelet in Table 2"},
+ "Bare-throated Tiger-Heron":{level:'H',scope:WATERBIRD_SCOPE.WH},
+ "Black Skimmer":{level:'H',scope:WATERBIRD_SCOPE.WH},
+ "Black Storm-Petrel":{level:'H',scope:WATERBIRD_SCOPE.WH},
+ "Blue-footed Booby":{level:'H',scope:WATERBIRD_SCOPE.WH},
+ "Blue-gray Noddy":{level:'H',scope:WATERBIRD_SCOPE.WH},
+ "Christmas Shearwater":{level:'H',scope:WATERBIRD_SCOPE.WH},
+ "Greater Shearwater":{level:'H',scope:WATERBIRD_SCOPE.WH},
+ "Great Shearwater":{level:'H',scope:WATERBIRD_SCOPE.WH,note:"Listed as Greater Shearwater in Table 2"},
+ "Jabiru":{level:'H',scope:WATERBIRD_SCOPE.WH},
+ "Least Tern":{level:'H',scope:WATERBIRD_SCOPE.WH},
+ "Little Blue Heron":{level:'H',scope:WATERBIRD_SCOPE.WH},
+ "Magnificent Frigatebird":{level:'H',scope:WATERBIRD_SCOPE.WH},
+ "Pink-footed Shearwater":{level:'H',scope:WATERBIRD_SCOPE.WH},
+ "Snail Kite":{level:'H',scope:WATERBIRD_SCOPE.WH},
+ "Snowy Egret":{level:'H',scope:WATERBIRD_SCOPE.WH},
+ "Tricolored Heron":{level:'H',scope:WATERBIRD_SCOPE.WH},
+ "Wood Stork":{level:'H',scope:WATERBIRD_SCOPE.WH},
+ "Aleutian Tern":{level:'H',scope:WATERBIRD_SCOPE.NH},
+ "Ancient Murrelet":{level:'H',scope:WATERBIRD_SCOPE.NH},
+ "Laysan Albatross":{level:'H',scope:WATERBIRD_SCOPE.NH},
+ "Marbled Murrelet":{level:'H',scope:WATERBIRD_SCOPE.NH},
+ "Pelagic Cormorant":{level:'H',scope:WATERBIRD_SCOPE.NH},
+ "Red-faced Cormorant":{level:'H',scope:WATERBIRD_SCOPE.NH},
+ "Red-legged Kittiwake":{level:'H',scope:WATERBIRD_SCOPE.NH},
+ "Ross's Gull":{level:'H',scope:WATERBIRD_SCOPE.NH},
+ "Short-tailed Albatross":{level:'H',scope:WATERBIRD_SCOPE.NH},
+ "Arctic Tern":{level:'H',scope:WATERBIRD_SCOPE.CO},
+ "Bridled Tern":{level:'H',scope:WATERBIRD_SCOPE.CO},
+ "Brown Booby":{level:'H',scope:WATERBIRD_SCOPE.CO},
+ "Gull-billed Tern":{level:'H',scope:WATERBIRD_SCOPE.CO},
+ "Masked Booby":{level:'H',scope:WATERBIRD_SCOPE.CO},
+ "Red-billed Tropicbird":{level:'H',scope:WATERBIRD_SCOPE.CO},
+ "Red-footed Booby":{level:'H',scope:WATERBIRD_SCOPE.CO},
+ "Roseate Tern":{level:'H',scope:WATERBIRD_SCOPE.CO},
+ "White-tailed Tropicbird":{level:'H',scope:WATERBIRD_SCOPE.CO},
+ "Herald Petrel":{level:'H',scope:WATERBIRD_SCOPE.PE},
+ "Little Gull":{level:'H',scope:WATERBIRD_SCOPE.PE},
+ "Little Tern":{level:'H',scope:WATERBIRD_SCOPE.PE},
+ "American White Pelican":{level:'M',scope:WATERBIRD_SCOPE.NA},
+ "California Gull":{level:'M',scope:WATERBIRD_SCOPE.NA},
+ "Cassin's Auklet":{level:'M',scope:WATERBIRD_SCOPE.NA},
+ "Forster's Tern":{level:'M',scope:WATERBIRD_SCOPE.NA},
+ "Heermann's Gull":{level:'M',scope:WATERBIRD_SCOPE.NA},
+ "Western Grebe":{level:'M',scope:WATERBIRD_SCOPE.NA},
+ "Yellow-footed Gull":{level:'M',scope:WATERBIRD_SCOPE.NA},
+ "Anhinga":{level:'M',scope:WATERBIRD_SCOPE.WH},
+ "Bonaparte's Gull":{level:'M',scope:WATERBIRD_SCOPE.WH},
+ "Brown Pelican":{level:'M',scope:WATERBIRD_SCOPE.WH},
+ "Elegant Tern":{level:'M',scope:WATERBIRD_SCOPE.WH},
+ "Franklin's Gull":{level:'M',scope:WATERBIRD_SCOPE.WH},
+ "Gray-backed Tern":{level:'M',scope:WATERBIRD_SCOPE.WH},
+ "Neotropic Cormorant":{level:'M',scope:WATERBIRD_SCOPE.WH},
+ "Reddish Egret":{level:'M',scope:WATERBIRD_SCOPE.WH},
+ "Roseate Spoonbill":{level:'M',scope:WATERBIRD_SCOPE.WH},
+ "White Ibis":{level:'M',scope:WATERBIRD_SCOPE.WH},
+ "Yellow-crowned Night-Heron":{level:'M',scope:WATERBIRD_SCOPE.WH},
+ "Bonin Petrel":{level:'M',scope:WATERBIRD_SCOPE.NH},
+ "Common Murre":{level:'M',scope:WATERBIRD_SCOPE.NH},
+ "Crested Auklet":{level:'M',scope:WATERBIRD_SCOPE.NH},
+ "Dovekie":{level:'M',scope:WATERBIRD_SCOPE.NH},
+ "Great Skua":{level:'M',scope:WATERBIRD_SCOPE.NH},
+ "Horned Puffin":{level:'M',scope:WATERBIRD_SCOPE.NH},
+ "Ivory Gull":{level:'M',scope:WATERBIRD_SCOPE.NH},
+ "Least Auklet":{level:'M',scope:WATERBIRD_SCOPE.NH},
+ "Northern Fulmar":{level:'M',scope:WATERBIRD_SCOPE.NH},
+ "Pigeon Guillemot":{level:'M',scope:WATERBIRD_SCOPE.NH},
+ "Razorbill":{level:'M',scope:WATERBIRD_SCOPE.NH},
+ "Thayer's Gull":{level:'M',scope:WATERBIRD_SCOPE.NH},
+ "Thick-billed Murre":{level:'M',scope:WATERBIRD_SCOPE.NH},
+ "Tristram's Storm-Petrel":{level:'M',scope:WATERBIRD_SCOPE.NH},
+ "Whiskered Auklet":{level:'M',scope:WATERBIRD_SCOPE.NH},
+ "Black-crowned Night-Heron":{level:'M',scope:WATERBIRD_SCOPE.CO},
+ "Black Tern":{level:'M',scope:WATERBIRD_SCOPE.CO},
+ "Black Noddy":{level:'M',scope:WATERBIRD_SCOPE.CO},
+ "Bulwer's Petrel":{level:'M',scope:WATERBIRD_SCOPE.CO},
+ "Cory's Shearwater":{level:'M',scope:WATERBIRD_SCOPE.CO},
+ "Eared Grebe":{level:'M',scope:WATERBIRD_SCOPE.CO},
+ "Great Cormorant":{level:'M',scope:WATERBIRD_SCOPE.CO},
+ "Great Frigatebird":{level:'M',scope:WATERBIRD_SCOPE.CO},
+ "Manx Shearwater":{level:'M',scope:WATERBIRD_SCOPE.CO},
+ "Red-tailed Tropicbird":{level:'M',scope:WATERBIRD_SCOPE.CO},
+ "Royal Tern":{level:'M',scope:WATERBIRD_SCOPE.CO},
+ "Sooty Shearwater":{level:'M',scope:WATERBIRD_SCOPE.CO},
+ "Sooty Tern":{level:'M',scope:WATERBIRD_SCOPE.CO},
+ "South Polar Skua":{level:'M',scope:WATERBIRD_SCOPE.CO},
+ "White Tern":{level:'M',scope:WATERBIRD_SCOPE.CO},
+ "Black-headed Gull":{level:'M',scope:WATERBIRD_SCOPE.PE},
+ "Great Crested Tern":{level:'M',scope:WATERBIRD_SCOPE.PE},
+ "Swift Tern":{level:'M',scope:WATERBIRD_SCOPE.PE,note:"Listed as Great Crested Tern in Table 2"},
+ "Juan Fernandez Petrel":{level:'M',scope:WATERBIRD_SCOPE.PE},
+ "Lesser Black-backed Gull":{level:'M',scope:WATERBIRD_SCOPE.PE},
+ "Clark's Grebe":{level:'L',scope:WATERBIRD_SCOPE.NA},
+ "Green Heron":{level:'L',scope:WATERBIRD_SCOPE.NA},
+ "Western Gull":{level:'L',scope:WATERBIRD_SCOPE.NA},
+ "White-faced Ibis":{level:'L',scope:WATERBIRD_SCOPE.WH},
+ "Glaucous-winged Gull":{level:'L',scope:WATERBIRD_SCOPE.NH},
+ "Iceland Gull":{level:'L',scope:WATERBIRD_SCOPE.NH},
+ "Parakeet Auklet":{level:'L',scope:WATERBIRD_SCOPE.NH},
+ "Rhinoceros Auklet":{level:'L',scope:WATERBIRD_SCOPE.NH},
+ "Tufted Puffin":{level:'L',scope:WATERBIRD_SCOPE.NH},
+ "Caspian Tern":{level:'L',scope:WATERBIRD_SCOPE.CO},
+ "Common Tern":{level:'L',scope:WATERBIRD_SCOPE.CO},
+ "Flesh-footed Shearwater":{level:'L',scope:WATERBIRD_SCOPE.CO},
+ "Glossy Ibis":{level:'L',scope:WATERBIRD_SCOPE.CO},
+ "Greater Flamingo":{level:'L',scope:WATERBIRD_SCOPE.CO},
+ "American Flamingo":{level:'L',scope:WATERBIRD_SCOPE.CO,note:"Listed as Greater Flamingo in Table 2"},
+ "Herring Gull":{level:'L',scope:WATERBIRD_SCOPE.CO},
+ "Leach's Storm-Petrel":{level:'L',scope:WATERBIRD_SCOPE.CO},
+ "Long-tailed Jaeger":{level:'L',scope:WATERBIRD_SCOPE.CO},
+ "Parasitic Jaeger":{level:'L',scope:WATERBIRD_SCOPE.CO},
+ "Pomarine Jaeger":{level:'L',scope:WATERBIRD_SCOPE.CO},
+ "Sabine's Gull":{level:'L',scope:WATERBIRD_SCOPE.CO},
+ "Wedge-rumped Storm-Petrel":{level:'L',scope:WATERBIRD_SCOPE.CO},
+ "Wedge-tailed Shearwater":{level:'L',scope:WATERBIRD_SCOPE.CO},
+ "White-necked Petrel":{level:'L',scope:WATERBIRD_SCOPE.PE},
+ "Double-crested Cormorant":{level:'N',scope:WATERBIRD_SCOPE.NA},
+ "Ring-billed Gull":{level:'N',scope:WATERBIRD_SCOPE.NA},
+ "Great Blue Heron":{level:'N',scope:WATERBIRD_SCOPE.WH},
+ "Laughing Gull":{level:'N',scope:WATERBIRD_SCOPE.WH},
+ "Northern Gannet":{level:'N',scope:WATERBIRD_SCOPE.WH},
+ "Atlantic Puffin":{level:'N',scope:WATERBIRD_SCOPE.NH},
+ "Black Guillemot":{level:'N',scope:WATERBIRD_SCOPE.NH},
+ "Black-legged Kittiwake":{level:'N',scope:WATERBIRD_SCOPE.NH},
+ "Fork-tailed Storm-Petrel":{level:'N',scope:WATERBIRD_SCOPE.NH},
+ "Glaucous Gull":{level:'N',scope:WATERBIRD_SCOPE.NH},
+ "Great Black-backed Gull":{level:'N',scope:WATERBIRD_SCOPE.NH},
+ "Brown Noddy":{level:'N',scope:WATERBIRD_SCOPE.CO},
+ "Cattle Egret":{level:'N',scope:WATERBIRD_SCOPE.CO},
+ "Great Egret":{level:'N',scope:WATERBIRD_SCOPE.CO},
+ "Mew Gull":{level:'N',scope:WATERBIRD_SCOPE.CO},
+ "Short-billed Gull":{level:'N',scope:WATERBIRD_SCOPE.CO,note:"Listed as Mew Gull in Table 2"},
+ "Sandwich Tern":{level:'N',scope:WATERBIRD_SCOPE.CO},
+ "Wilson's Storm-Petrel":{level:'N',scope:WATERBIRD_SCOPE.CO},
+ "Buller's Shearwater":{level:'N',scope:WATERBIRD_SCOPE.PE},
+ "Cook's Petrel":{level:'N',scope:WATERBIRD_SCOPE.PE},
+ "Short-tailed Shearwater":{level:'N',scope:WATERBIRD_SCOPE.PE},
+ "Agami Heron":{level:'IL',scope:WATERBIRD_SCOPE.WH},
+ "Boat-billed Heron":{level:'IL',scope:WATERBIRD_SCOPE.WH},
+ "Fasciated Tiger-Heron":{level:'IL',scope:WATERBIRD_SCOPE.WH},
+ "Green Ibis":{level:'IL',scope:WATERBIRD_SCOPE.WH},
+ "Rufescent Tiger-Heron":{level:'IL',scope:WATERBIRD_SCOPE.WH},
+ "Striated Heron":{level:'IL',scope:WATERBIRD_SCOPE.WH},
+ "Capped Heron":{level:'IL',scope:WATERBIRD_SCOPE.PE},
+ "Cocoi Heron":{level:'IL',scope:WATERBIRD_SCOPE.PE},
+ "Kermadec Petrel":{level:'IL',scope:WATERBIRD_SCOPE.PE},
+ "Lesser Frigatebird":{level:'IL',scope:WATERBIRD_SCOPE.PE},
+ "Mottled Petrel":{level:'IL',scope:WATERBIRD_SCOPE.PE},
+ "Nazca Booby":{level:'IL',scope:WATERBIRD_SCOPE.PE},
+ "Scarlet Ibis":{level:'IL',scope:WATERBIRD_SCOPE.PE},
+ "Slaty-backed Gull":{level:'IL',scope:WATERBIRD_SCOPE.PE},
+ "Western Reef-Heron":{level:'IL',scope:WATERBIRD_SCOPE.PE},
+ "White-winged Petrel":{level:'IL',scope:WATERBIRD_SCOPE.PE},
+};
+const PIF_PLAN={
+ "Gunnison Sage-Grouse":{level:'R',label:'RECOVER: Red Watch List'},
+ "Lesser Prairie-Chicken":{level:'R',label:'RECOVER: Red Watch List'},
+ "California Condor":{level:'R',label:'RECOVER: Red Watch List'},
+ "Red-cockaded Woodpecker":{level:'R',label:'RECOVER: Red Watch List'},
+ "Ivory-billed Woodpecker":{level:'R',label:'RECOVER: Red Watch List'},
+ "Red-crowned Parrot":{level:'R',label:'RECOVER: Red Watch List'},
+ "Black-capped Vireo":{level:'R',label:'RECOVER: Red Watch List'},
+ "Florida Scrub-Jay":{level:'R',label:'RECOVER: Red Watch List'},
+ "Bicknell's Thrush":{level:'R',label:'RECOVER: Red Watch List'},
+ "Bendire's Thrasher":{level:'R',label:'RECOVER: Red Watch List'},
+ "LeConte's Thrasher":{level:'R',label:'RECOVER: Red Watch List'},
+ "Bachman's Warbler":{level:'R',label:'RECOVER: Red Watch List'},
+ "Golden-winged Warbler":{level:'R',label:'RECOVER: Red Watch List'},
+ "Golden-cheeked Warbler":{level:'R',label:'RECOVER: Red Watch List'},
+ "Bachman's Sparrow":{level:'R',label:'RECOVER: Red Watch List'},
+ "Saltmarsh Sparrow":{level:'R',label:'RECOVER: Red Watch List'},
+ "Tricolored Blackbird":{level:'R',label:'RECOVER: Red Watch List'},
+ "Black Rosy-Finch":{level:'R',label:'RECOVER: Red Watch List'},
+ "Brown-capped Rosy-Finch":{level:'R',label:'RECOVER: Red Watch List'},
+ "Flammulated Owl":{level:'ND',label:'PREVENT DECLINE: Yellow Watch List'},
+ "Lucifer Hummingbird":{level:'ND',label:'PREVENT DECLINE: Yellow Watch List'},
+ "Gray Vireo":{level:'ND',label:'PREVENT DECLINE: Yellow Watch List'},
+ "Island Scrub-Jay":{level:'ND',label:'PREVENT DECLINE: Yellow Watch List'},
+ "California Gnatcatcher":{level:'ND',label:'PREVENT DECLINE: Yellow Watch List'},
+ "McKay's Bunting":{level:'ND',label:'PREVENT DECLINE: Yellow Watch List'},
+ "Colima Warbler":{level:'ND',label:'PREVENT DECLINE: Yellow Watch List'},
+ "Kirtland's Warbler":{level:'ND',label:'PREVENT DECLINE: Yellow Watch List'},
+ "Henslow's Sparrow":{level:'ND',label:'PREVENT DECLINE: Yellow Watch List'},
+ "Nelson's Sparrow":{level:'ND',label:'PREVENT DECLINE: Yellow Watch List'},
+ "Seaside Sparrow":{level:'ND',label:'PREVENT DECLINE: Yellow Watch List'},
+ "Audubon's Oriole":{level:'ND',label:'PREVENT DECLINE: Yellow Watch List'},
+ "Mountain Quail":{level:'D',label:'REVERSE DECLINE: "D" Yellow Watch List'},
+ "Scaled Quail":{level:'D',label:'REVERSE DECLINE: "D" Yellow Watch List'},
+ "Greater Sage-Grouse":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Sooty Grouse":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Greater Prairie-Chicken":{level:'D',label:'REVERSE DECLINE: "D" Yellow Watch List'},
+ "White-crowned Pigeon":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Band-tailed Pigeon":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Mangrove Cuckoo":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Black-billed Cuckoo":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Whiskered Screech-Owl":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Snowy Owl":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Spotted Owl":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Long-eared Owl":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Eastern Whip-poor-will":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Mexican Whip-poor-will":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Black Swift":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Rufous Hummingbird":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Allen's Hummingbird":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Elegant Trogon":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Lewis's Woodpecker":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Red-headed Woodpecker":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Arizona Woodpecker":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Gilded Flicker":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Green Parakeet":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Olive-sided Flycatcher":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Pinyon Jay":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Yellow-billed Magpie":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Chestnut-backed Chickadee":{level:'D',label:'REVERSE DECLINE: "D" Yellow Watch List'},
+ "Mexican Chickadee":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Oak Titmouse":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Black-capped Gnatcatcher":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Wrentit":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Wood Thrush":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "California Thrasher":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Sprague's Pipit":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Chestnut-collared Longspur":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Thick-billed Longspur":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Prothonotary Warbler":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Virginia's Warbler":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Connecticut Warbler":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Kentucky Warbler":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Cape May Warbler":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Cerulean Warbler":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Prairie Warbler":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Grace's Warbler":{level:'D',label:'REVERSE DECLINE: "D" Yellow Watch List'},
+ "Canada Warbler":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Rufous-winged Sparrow":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Black-chinned Sparrow":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Five-striped Sparrow":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Baird's Sparrow":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "LeConte's Sparrow":{level:'D',label:'REVERSE DECLINE: "D" Yellow Watch List'},
+ "Harris's Sparrow":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Bobolink":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Cassin's Finch":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Evening Grosbeak":{level:'D',label:'REVERSE DECLINE: Yellow Watch List'},
+ "Northern Bobwhite":{level:'C',label:'Common Birds in Steep Decline - STABILIZE Populations'},
+ "Yellow-billed Cuckoo":{level:'C',label:'Common Birds in Steep Decline - STABILIZE Populations'},
+ "Short-eared Owl":{level:'C',label:'Common Birds in Steep Decline - STABILIZE Populations'},
+ "Common Nighthawk":{level:'C',label:'Common Birds in Steep Decline - STABILIZE Populations'},
+ "Chuck-will's-widow":{level:'C',label:'Common Birds in Steep Decline - STABILIZE Populations'},
+ "Chimney Swift":{level:'C',label:'Common Birds in Steep Decline - STABILIZE Populations'},
+ "Least Flycatcher":{level:'C',label:'Common Birds in Steep Decline - STABILIZE Populations'},
+ "Loggerhead Shrike":{level:'C',label:'Common Birds in Steep Decline - STABILIZE Populations'},
+ "Horned Lark":{level:'C',label:'Common Birds in Steep Decline - STABILIZE Populations'},
+ "Bank Swallow":{level:'C',label:'Common Birds in Steep Decline - STABILIZE Populations'},
+ "Verdin":{level:'C',label:'Common Birds in Steep Decline - STABILIZE Populations'},
+ "Cactus Wren":{level:'C',label:'Common Birds in Steep Decline - STABILIZE Populations'},
+ "Varied Thrush":{level:'C',label:'Common Birds in Steep Decline - STABILIZE Populations'},
+ "Blackpoll Warbler":{level:'C',label:'Common Birds in Steep Decline - STABILIZE Populations'},
+ "Wilson's Warbler":{level:'C',label:'Common Birds in Steep Decline - STABILIZE Populations'},
+ "American Tree Sparrow":{level:'C',label:'Common Birds in Steep Decline - STABILIZE Populations'},
+ "Field Sparrow":{level:'C',label:'Common Birds in Steep Decline - STABILIZE Populations'},
+ "Lark Bunting":{level:'C',label:'Common Birds in Steep Decline - STABILIZE Populations'},
+ "Grasshopper Sparrow":{level:'C',label:'Common Birds in Steep Decline - STABILIZE Populations'},
+ "Eastern Meadowlark":{level:'C',label:'Common Birds in Steep Decline - STABILIZE Populations'},
+ "Rusty Blackbird":{level:'C',label:'Common Birds in Steep Decline - STABILIZE Populations'},
+ "Brewer's Blackbird":{level:'C',label:'Common Birds in Steep Decline - STABILIZE Populations'},
+ "Common Grackle":{level:'C',label:'Common Birds in Steep Decline - STABILIZE Populations'},
+ "Pine Siskin":{level:'C',label:'Common Birds in Steep Decline - STABILIZE Populations'},
+};
+const SHOREBIRD_PLAN={
+ "American Oystercatcher":{level:'Greatest',scope:'North America breeding palliatus'},
+ "Snowy Plover":{level:'ESA',scope:'ESA-listed entry: nivosus [Pacific Coast]; also Greatest Concern for Interior/Gulf Coast nivosus and tenuirostris'},
+ "Wilson's Plover":{level:'Greatest',scope:'North America breeding wilsonia'},
+ "Mountain Plover":{level:'Greatest'},
+ "Bristle-thighed Curlew":{level:'Greatest'},
+ "Bar-tailed Godwit":{level:'Greatest',scope:'baueri'},
+ "Red Knot":{level:'ESA',scope:'ESA-listed entry: rufa; also Greatest Concern for roselaari'},
+ "Black Oystercatcher":{level:'High'},
+ "American Golden-Plover":{level:'High'},
+ "Pacific Golden-Plover":{level:'High',scope:'Alaska breeding population'},
+ "Whimbrel":{level:'High',scope:'Alaska and Canada breeding population'},
+ "Long-billed Curlew":{level:'High'},
+ "Hudsonian Godwit":{level:'High'},
+ "Marbled Godwit":{level:'High'},
+ "Ruddy Turnstone":{level:'High',scope:'Highest concern entry: morinella; also Moderate Concern for Alaska breeding interpres'},
+ "Black Turnstone":{level:'High'},
+ "Dunlin":{level:'High',scope:'Highest concern entry: arcticola and hudsonia; also Moderate Concern for pacifica'},
+ "Rock Sandpiper":{level:'High',scope:'Highest concern entry: ptilocnemis; also Least Concern for cousei and tschuktschorum'},
+ "Purple Sandpiper":{level:'High',scope:'Canada breeding maritima and belcheri'},
+ "Buff-breasted Sandpiper":{level:'High'},
+ "Pectoral Sandpiper":{level:'High'},
+ "Semipalmated Sandpiper":{level:'High'},
+ "Short-billed Dowitcher":{level:'High',scope:'Also listed as Moderate Concern in the 2016 plan'},
+ "Long-billed Dowitcher":{level:'High',scope:'Also listed as Moderate Concern in the 2016 plan'},
+ "American Woodcock":{level:'High'},
+ "Willet":{level:'High'},
+ "Lesser Yellowlegs":{level:'High'},
+ "American Avocet":{level:'Moderate'},
+ "Black-bellied Plover":{level:'Moderate',scope:'Alaska breeding squatarola and cynosurae'},
+ "Killdeer":{level:'Moderate'},
+ "Surfbird":{level:'Moderate'},
+ "Sanderling":{level:'Moderate',scope:'Western Hemisphere population'},
+ "Western Sandpiper":{level:'Moderate'},
+ "Red-necked Phalarope":{level:'Moderate',scope:'Alaska and Canada breeding population'},
+ "Red Phalarope":{level:'Moderate',scope:'Alaska and Canada breeding population'},
+ "Black-necked Stilt":{level:'ESA',scope:'ESA-listed entry: knudseni; also Least Concern for North America breeding mexicanus'},
+ "Piping Plover":{level:'ESA'},
+ "Eskimo Curlew":{level:'ESA'},
+ "Semipalmated Plover":{level:'Least'},
+ "Upland Sandpiper":{level:'Least'},
+ "Sharp-tailed Sandpiper":{level:'Least',scope:'Alaska migrant population'},
+ "Stilt Sandpiper":{level:'Least'},
+ "Baird's Sandpiper":{level:'Least'},
+ "Least Sandpiper":{level:'Least'},
+ "White-rumped Sandpiper":{level:'Least'},
+ "Wilson's Snipe":{level:'Least'},
+ "Spotted Sandpiper":{level:'Least'},
+ "Solitary Sandpiper":{level:'Least'},
+ "Wandering Tattler":{level:'Least'},
+ "Greater Yellowlegs":{level:'Least'},
+ "Wilson's Phalarope":{level:'Least'},
+};
+function shoreCode(level){return SHORE_LEVELS[level]?SHORE_LEVELS[level].code:'';}
+function shoreRank(level){return SHORE_LEVELS[level]?SHORE_LEVELS[level].rank:0;}
+function shoreColor(level){return SHORE_LEVELS[level]?SHORE_LEVELS[level].color:cssv('--fw-shore');}
+function waterCode(w){return w?String(w.score).replace(/\.0$/,''):'';}
+function waterRank(w){return w&&w.score!=null?Number(w.score):0;}
+function waterColor(level){return WATERFOWL_LEVELS[level]?WATERFOWL_LEVELS[level].color:cssv('--fw-water');}
+function waterbirdCode(level){return WATERBIRD_LEVELS[level]?WATERBIRD_LEVELS[level].code:'';}
+function waterbirdRank(level){return WATERBIRD_LEVELS[level]?WATERBIRD_LEVELS[level].rank:0;}
+function waterbirdColor(level){return WATERBIRD_LEVELS[level]?WATERBIRD_LEVELS[level].color:cssv('--fw-wb');}
+function tpCode(v){return v===1?'TP':'';}
+function tpRank(v){return v===1?1:0;}
+function tpColor(){return cssv('--fw-tp');}
+function wlCode(v){return v==='Red'?'R':v==='Orange'?'O':v==='Yellow'?'Y':'';}
+function wlRank(v){return v==='Red'?3:v==='Orange'?2:v==='Yellow'?1:0;}
+function wlColor(v){return v==='Red'?'#B23A48':v==='Orange'?'#C8763A':v==='Yellow'?'#B59F2E':cssv('--fw-wl');}
+function pfCode(level){return PIF_LEVELS[level]?PIF_LEVELS[level].code:'';}
+function pfRank(level){return PIF_LEVELS[level]?PIF_LEVELS[level].rank:0;}
+function pfColor(level){return PIF_LEVELS[level]?PIF_LEVELS[level].color:cssv('--fw-pf');}
+function waterTip(r){
+  if(!r.water)return '—';
+  let tip=`${WATERFOWL_LEVELS[r.water.level].label} · Total score ${waterCode(r.water)}`;
+  if(r.water.scope)tip+=` · ${r.water.scope}`;
+  return tip;
+}
+function waterbirdTip(r){
+  if(!r.waterbird)return '—';
+  let tip=`${WATERBIRD_LEVELS[r.waterbird.level].label} · ${r.waterbird.scope}`;
+  if(r.waterbird.note)tip+=` · ${r.waterbird.note}`;
+  return tip;
+}
+function tpTip(r){return r.tp===1?'Tipping Point species · ACAD Global 2024':'—';}
+function wlTip(r){return r.wl?`${r.wl} Watch List category · ACAD Global 2024`:'—';}
+function pfTip(r){
+  if(!r.pf)return '—';
+  return PIF_LEVELS[r.pf.level].label;
+}
+function shoreTip(r){
+  if(!r.shore)return '—';
+  let tip=`${SHORE_LEVELS[r.shore.level].label}`;
+  if(r.shore.scope)tip+=` · ${r.shore.scope}`;
+  return tip;
+}
+DATA.forEach(r=>{r.water=WATERFOWL_PLAN[r.cn]||null;});
+DATA.forEach(r=>{
+  const wb=WATERBIRD_PLAN[r.cn];
+  r.waterbird=wb?{...wb,label:WATERBIRD_LEVELS[wb.level].label}:null;
+});
+DATA.forEach(r=>{
+  const pf=PIF_PLAN[r.cn];
+  r.pf=pf?{...pf,label:PIF_LEVELS[pf.level].label}:null;
+});
+DATA.forEach(r=>{r.shore=SHOREBIRD_PLAN[r.cn]||null;});
+
 const FW=[
  {k:'esa',label:'ESA',full:'Endangered Species Act',col:'--fw-esa',grp:'Federal',
   flag:r=>!!r.esa, code:r=>/^Endangered/.test(r.esa)?'E':/^Threatened/.test(r.esa)?'T':/^Experimental/.test(r.esa)?'XN':'•',
@@ -286,7 +772,25 @@ const FW=[
   flag:r=>!!r.r2r, code:r=>r.r2r.slice(0,1),
   rank:r=>({Red:3,Orange:2,Yellow:1})[r.r2r]||0,
   vint:'2025', tip:r=>'R2R '+r.r2r+' alert'},
+ {k:'water',label:'WF',full:'North American Waterfowl Management Plan — 2023 Ducks Prioritization',col:'--fw-water',colr:r=>waterColor(r.water.level),grp:'Conservation Status',
+  flag:r=>!!r.water, code:r=>waterCode(r.water),
+  rank:r=>waterRank(r.water),
+  vint:'2023 revision · page 10', tip:r=>waterTip(r)},
+ {k:'waterbird',label:'WB',full:'Waterbird Conservation for the Americas — Colonial Waterbirds Table 2',col:'--fw-wb',colr:r=>waterbirdColor(r.waterbird.level),grp:'Conservation Status',
+  flag:r=>!!r.waterbird, code:r=>waterbirdCode(r.waterbird.level),
+  rank:r=>r.waterbird?waterbirdRank(r.waterbird.level):0,
+  vint:'Table 2 · page 24', tip:r=>waterbirdTip(r)},
+ {k:'pf',label:'PF',full:'Partners in Flight 2016 Landbird Conservation Plan Revision — Watch List and Common Birds in Steep Decline',col:'--fw-pf',colr:r=>pfColor(r.pf.level),grp:'Conservation Status',
+  flag:r=>!!r.pf, code:r=>pfCode(r.pf.level),
+  rank:r=>r.pf?pfRank(r.pf.level):0,
+  vint:'2016 revision · Table 1 + Appendix B', tip:r=>pfTip(r)},
+ {k:'shore',label:'SH',full:'Shorebirds of Conservation Concern — 2016 List',col:'--fw-shore',colr:r=>shoreColor(r.shore.level),grp:'Conservation Status',
+  flag:r=>!!r.shore, code:r=>shoreCode(r.shore.level),
+  rank:r=>r.shore?shoreRank(r.shore.level):0,
+  vint:'2016 list', tip:r=>shoreTip(r)},
 ];
+const PLAN_FW=FW.filter(f=>['water','waterbird','pf','shore'].includes(f.k));
+const TABLE_FW=FW.filter(f=>!['water','waterbird','pf','shore'].includes(f.k));
 const SGCN={k:'sgcn',label:'SGCN',full:'State Species of Greatest Conservation Need',col:'--fw-sgcn',
   flag:r=>r.sg===1, code:r=>String(r.sgn||''),
   rank:r=>r.sg===1?(parseInt(r.sgn)||1):0,
@@ -302,20 +806,55 @@ function thr(c){return c && c!=='LC' && c!=='DD';}
 function fcount(r){return FW.reduce((n,f)=>n+(f.flag(r)?1:0),0)+(SGCN.flag(r)?1:0);}
 DATA.forEach(r=>{r._c=fcount(r); r._g=FILTER_FW.filter(f=>f.flag(r)).map(f=>f.k);});
 
+/* ---------- column definitions (single source of truth for header + body cells) ---------- */
+// Each column belongs to exactly one "section" (matches the group-header labels).
+// Hiding a section removes its columns from COLUMN_DEFS-derived output entirely, so the
+// remaining columns reflow left instead of leaving a gap — see visibleColumns()/st.hiddenCols.
+function fwFind(k){return FW.find(f=>f.k===k);}
+const F_ESA=fwFind('esa'),F_MBTA=fwFind('mbta'),F_BCC=fwFind('bcc'),F_CMS=fwFind('cms'),F_CITES=fwFind('cites'),
+      F_IUCN=fwFind('iucn'),F_R2R=fwFind('r2r'),F_WATER=fwFind('water'),F_WATERBIRD=fwFind('waterbird'),F_PF=fwFind('pf'),F_SHORE=fwFind('shore');
+const SECTION_ORDER=['Federal','State','International','Conservation Status','ACAD','Plans','Population trend','Priority'];
+const COLUMN_DEFS=[
+ {key:'esa',section:'Federal',width:38,label:F_ESA.label,title:F_ESA.full,cell:r=>fwCell(F_ESA,r)},
+ {key:'mbta',section:'Federal',width:38,label:F_MBTA.label,title:F_MBTA.full,cell:r=>fwCell(F_MBTA,r)},
+ {key:'bcc',section:'Federal',width:46,label:F_BCC.label,title:F_BCC.full,cell:r=>fwCell(F_BCC,r)},
+ {key:'blm',section:'Federal',width:38,label:'BLM',title:'Listed in one or more supplied BLM Special Status or Sensitive wildlife lists',cell:r=>blmCell(r)},
+ {key:'usfs',section:'Federal',width:38,label:'USFS',title:'Listed in one or more available USFS Regional Forester Sensitive Species bird lists',cell:r=>usfsCell(r)},
+ {key:'stateEsaCount',section:'State',width:58,label:'State ESA',title:'Number of states or territories where this species has a state-level endangered or threatened designation in the supplied workbook',cell:r=>stateEsaCountCell(r)},
+ {key:'sgcn',section:'State',width:38,label:'SGCN',title:SGCN.full,cell:r=>sgcnCell(r)},
+ {key:'cms',section:'International',width:48,label:F_CMS.label,title:F_CMS.full,cell:r=>fwCell(F_CMS,r)},
+ {key:'cites',section:'International',width:48,label:F_CITES.label,title:F_CITES.full,cell:r=>fwCell(F_CITES,r)},
+ {key:'iucn',section:'Conservation Status',width:46,label:F_IUCN.label,title:F_IUCN.full,cell:r=>fwCell(F_IUCN,r)},
+ {key:'r2r',section:'Conservation Status',width:46,label:F_R2R.label,title:F_R2R.full,cell:r=>fwCell(F_R2R,r)},
+ {key:'nsr',section:'Conservation Status',width:52,label:'NS',title:'NatureServe Global Conservation Status Rank (G1 critically imperiled – G5 secure; X/H = presumed/possibly extinct; NR/U = not ranked)',cell:r=>nsCell(r)},
+ {key:'ccs',section:'ACAD',width:52,label:'CCS',title:'ACAD Combined Conservation Score (4–20; ≥14 = Watch List level)',cell:r=>ccsCell(r)},
+ {key:'tp',section:'ACAD',width:44,label:'TP',title:'ACAD Global 2024 Tipping Point species flag',cell:r=>tpCell(r)},
+ {key:'wl',section:'ACAD',width:44,label:'WL',title:'ACAD Global 2024 Watch List category',cell:r=>wlCell(r)},
+ {key:'water',section:'Plans',width:30,label:F_WATER.label,title:F_WATER.full,cell:r=>fwCell(F_WATER,r)},
+ {key:'waterbird',section:'Plans',width:30,label:F_WATERBIRD.label,title:F_WATERBIRD.full,cell:r=>fwCell(F_WATERBIRD,r)},
+ {key:'pf',section:'Plans',width:30,label:F_PF.label,title:F_PF.full,cell:r=>fwCell(F_PF,r)},
+ {key:'shore',section:'Plans',width:30,label:F_SHORE.label,title:F_SHORE.full,cell:r=>fwCell(F_SHORE,r)},
+ {key:'lt',section:'Population trend',width:58,label:'1966+',title:'BBS Core survey-wide total population change, compounded across the stated 1966–2024-era interval',cell:r=>trendCell(r.lt,'lt')},
+ {key:'st',section:'Population trend',width:58,label:'1993+',title:'BBS Expanded survey-wide total population change, compounded from 1993 through 2024',cell:r=>trendCell(r.st,'st')},
+ {key:'pg',section:'Priority',width:72,label:'Priority gap',title:'Priority-gap score (0–100): combines threat level (IUCN, R2R, ACAD CCS, NatureServe, BCC, SGCN) against protection level (federal ESA + state ESA listings). Higher = more imperiled relative to how little it is currently protected.',cell:r=>pgCell(r)},
+];
+function visibleColumns(){return COLUMN_DEFS.filter(c=>!st.hiddenCols.has(c.section));}
+
 const PRESETS=[
  {id:'prioritygap',name:'Highest priority gaps',desc:'Priority-gap score ≥ 75 — most imperiled relative to protection',test:r=>r.pg>=75},
- {id:'consensus',name:'Multi-framework consensus',desc:'Flagged by 4+ of 6 frameworks',test:r=>r._c>=4},
+ {id:'consensus',name:'Multi-framework consensus',desc:'Flagged by 4+ tracked frameworks',test:r=>r._c>=4},
  {id:'unprot',name:'Declining, unprotected',desc:'R2R tipping-point alert, but no federal or state ESA listing',test:r=>r.r2r&&!r.esa&&!r.stateEsaCount},
  {id:'decline',name:'Steepest declines',desc:'Long-term BBS loss of 50% or more',test:r=>r.lt!=null&&r.lt<=-50},
  {id:'stateonly',name:'State concern only',desc:'SGCN or state ESA, but no federal/intl listing',test:r=>(r.sg===1||r.stateEsaCount>0)&&!r.esa&&!r.bcc&&!r.cms},
  {id:'iucngap',name:'IUCN-threatened, no US listing',desc:'IUCN NT+ but not ESA or BCC',test:r=>thr(r.i25)&&!r.esa&&r.bcc!=='Yes'},
 ];
 
-const st={q:'',groups:new Set(),habs:new Set(),us:true,min:0,req:new Set(),exc:new Set(),preset:null,sortKeys:[{k:'_c',dir:-1}]};
+const st={q:'',groups:new Set(),habs:new Set(),us:true,min:0,req:new Set(),exc:new Set(),preset:null,sortKeys:[{k:'_c',dir:-1}],hiddenCols:new Set()};
 const $=s=>document.querySelector(s), cssv=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 
 /* ---------- sidebar build ---------- */
 function buildSidebar(){
+  $('#minc').max=FW.length+1;
   const pr=$('#presets'); PRESETS.forEach(p=>{
     const b=document.createElement('button');b.className='preset';b.dataset.id=p.id;
     b.innerHTML=`${p.name}<small>${p.desc}</small>`;
@@ -354,37 +893,22 @@ function syncPresetUI(){document.querySelectorAll('.preset').forEach(b=>b.classL
 
 /* ---------- header / table head ---------- */
 function buildHead(){
-  const compactCols=new Set(['esa','mbta']);
-  const intlCols=new Set(['cms','cites']);
-  const fwCols=FW.flatMap(f=>{
-    const cols=[`<col style="width:${compactCols.has(f.k)?38:intlCols.has(f.k)?48:46}px">`];
-    if(f.k==='bcc')cols.push('<col style="width:38px">','<col style="width:38px">','<col style="width:58px">','<col style="width:38px">');
-    if(f.k==='r2r')cols.push('<col style="width:52px">');
-    return cols;
-  });
-  const cg=['<col style="width:42px">','<col style="width:92px">','<col style="width:252px">'].concat(fwCols).concat(['<col style="width:52px">','<col style="width:58px">','<col style="width:58px">','<col style="width:72px">']).join('');
+  const cols=visibleColumns();
+  const cg=['<col style="width:42px">','<col style="width:92px">','<col style="width:252px">']
+    .concat(cols.map(c=>`<col style="width:${c.width}px">`)).join('');
   const tbl=document.getElementById('matrix'); const old=tbl.querySelector('colgroup'); if(old)old.remove();
   tbl.insertAdjacentHTML('afterbegin','<colgroup>'+cg+'</colgroup>');
-  const grpSpan={}; GROUPS.forEach(g=>grpSpan[g]=FW.filter(f=>f.grp===g).length);
-  grpSpan['Federal']+=2;
-  grpSpan['State']=2;
-  grpSpan['Conservation Status']+=2;
+  const fixedWidth=42+92+252, visWidth=cols.reduce((n,c)=>n+c.width,0);
+  tbl.style.width=(fixedWidth+visWidth)+'px';
+  // group visible columns into contiguous runs by section, in SECTION_ORDER
   let gh='<tr class="grouphead"><th class="idx"></th><th class="cnt"></th><th class="name gsp"></th>';
-  GROUPS.forEach(g=>gh+=`<th class="gsp" colspan="${grpSpan[g]}">${g}</th>`); gh+='<th class="gsp" colspan="2">Population trend</th><th class="gsp">Priority</th></tr>';
-  let ch='<tr class="cols"><th class="idx" title="Visible row number">#</th><th class="cnt" data-s="_c">Frameworks</th><th class="name" data-s="cn">Species</th>';
-  FW.forEach(f=>{ch+=`<th class="thc" data-s="${f.k}" title="${f.full}"><span class="lab">${f.label}</span></th>`;
-    if(f.k==='bcc'){
-      ch+=`<th class="thc" data-s="blm" title="Listed in one or more supplied BLM Special Status or Sensitive wildlife lists"><span class="lab">BLM</span></th>`;
-      ch+=`<th class="thc" data-s="usfs" title="Listed in one or more available USFS Regional Forester Sensitive Species bird lists"><span class="lab">USFS</span></th>`;
-      ch+=`<th class="thc" data-s="stateEsaCount" title="Number of states or territories where this species has a state-level endangered or threatened designation in the supplied workbook"><span class="lab">State ESA</span></th>`;
-      ch+=`<th class="thc" data-s="sgcn" title="${SGCN.full}"><span class="lab">SGCN</span></th>`;
-    }
-    if(f.k==='r2r')ch+=`<th class="thc" data-s="nsr" title="NatureServe Global Conservation Status Rank (G1 critically imperiled – G5 secure; X/H = presumed/possibly extinct; NR/U = not ranked)"><span class="lab">NS</span></th>`;
+  SECTION_ORDER.forEach(sec=>{
+    const span=cols.filter(c=>c.section===sec).length;
+    if(span>0)gh+=`<th class="gsp hideable" colspan="${span}" data-hide="${sec}" title="Click to hide ${sec} columns">${sec}</th>`;
   });
-  ch+=`<th class="thc" data-s="ccs" title="ACAD Combined Conservation Score (4–20; ≥14 = Watch List level)"><span class="lab">CCS</span></th>`;
-  ch+=`<th class="thc" data-s="lt" title="BBS Core survey-wide total population change, compounded across the stated 1966–2024-era interval"><span class="lab">1966+</span></th>`;
-  ch+=`<th class="thc" data-s="st" title="BBS Expanded survey-wide total population change, compounded from 1993 through 2024"><span class="lab">1993+</span></th>`;
-  ch+=`<th class="thc" data-s="pg" title="Priority-gap score (0–100): combines threat level (IUCN, R2R, ACAD CCS, NatureServe, BCC, SGCN) against protection level (federal ESA + state ESA listings). Higher = more imperiled relative to how little it is currently protected."><span class="lab">Priority gap</span></th>`;
+  gh+='</tr>';
+  let ch='<tr class="cols"><th class="idx" title="Visible row number">#</th><th class="cnt" data-s="_c">Frameworks</th><th class="name" data-s="cn">Species</th>';
+  cols.forEach(c=>{ch+=`<th class="thc" data-s="${c.key}" title="${c.title}"><span class="lab">${c.label}</span></th>`;});
   ch+='</tr>';
   $('#thead').innerHTML=gh+ch;
   $('#thead').querySelectorAll('[data-s]').forEach(th=>th.onclick=()=>{
@@ -394,6 +918,21 @@ function buildHead(){
     else st.sortKeys.splice(i,1);                          // ascending -> remove
     if(!st.sortKeys.length)st.sortKeys.push({k:'_c',dir:-1}); // never empty -> default
     render(); pushURL();});
+  $('#thead').querySelectorAll('[data-hide]').forEach(th=>th.onclick=e=>{
+    e.stopPropagation();
+    st.hiddenCols.add(th.dataset.hide);
+    buildHead(); render(); renderHiddenPills(); pushURL();
+  });
+  renderHiddenPills();
+}
+function renderHiddenPills(){
+  const el=$('#hiddenpills'); if(!el)return;
+  el.innerHTML=[...st.hiddenCols].sort((a,b)=>SECTION_ORDER.indexOf(a)-SECTION_ORDER.indexOf(b)).map(sec=>
+    `<span class="hpill" data-show="${sec}" title="Click to show ${sec} columns">+ ${sec}</span>`).join('');
+  el.querySelectorAll('[data-show]').forEach(p=>p.onclick=()=>{
+    st.hiddenCols.delete(p.dataset.show);
+    buildHead(); render(); pushURL();
+  });
 }
 
 /* ---------- filtering + render ---------- */
@@ -409,7 +948,7 @@ function applyFilters(){
   if(st.exc.size)rows=rows.filter(r=>![...st.exc].some(k=>r._g.includes(k)));
   return rows;
 }
-function labelFor(k){return k==='_c'?'framework count':k==='pg'?'priority-gap score':k==='stateEsaCount'?'State ESA count':k==='sgcn'?'SGCN':k==='cn'?'name':k==='ccs'?'CCS':k==='nsr'?'NatureServe rank':k==='blm'?'BLM lists':k==='usfs'?'USFS lists':k==='lt'?'1966+ trend':k==='st'?'1993+ trend':(FW.find(f=>f.k===k)||{}).label||k;}
+function labelFor(k){return k==='_c'?'framework count':k==='pg'?'priority-gap score':k==='stateEsaCount'?'State ESA count':k==='sgcn'?'SGCN':k==='cn'?'name':k==='ccs'?'CCS':k==='tp'?'ACAD Tipping Point':k==='wl'?'ACAD Watch List':k==='nsr'?'NatureServe rank':k==='blm'?'BLM lists':k==='usfs'?'USFS lists':k==='lt'?'1966+ trend':k==='st'?'1993+ trend':(FW.find(f=>f.k===k)||{}).label||k;}
 function sortVal(r,k){
   if(k==='cn')return r.cn;
   if(k==='_c')return r._c;
@@ -417,6 +956,8 @@ function sortVal(r,k){
   if(k==='sgcn')return SGCN.rank(r);
   if(k==='pg')return r.pg;
   if(k==='ccs')return r.ccs==null?-1:r.ccs;
+  if(k==='tp')return tpRank(r.tp);
+  if(k==='wl')return wlRank(r.wl);
   if(k==='nsr')return nsRankNum(r.nsr);
   if(k==='blm')return r.blm?r.blm.length:0;
   if(k==='usfs')return r.usfs?r.usfs.length:0;
@@ -476,31 +1017,23 @@ function fmtTrendCompact(v){if(v===null||v===undefined||v==='')return '—';cons
   if(a>=10000)return sign+Math.round(a/1000)+'k%';
   if(a>=1000)return sign+(a/1000).toFixed(1)+'k%';
   return sign+a.toLocaleString(undefined,{maximumFractionDigits:1})+'%';}
+function fwCell(f,r){
+  if(!f.flag(r))return `<td class="fwcell" data-col="${f.k}"></td>`;
+  const c=f.colr?f.colr(r):cssv(f.col);
+  return `<td class="fwcell" data-col="${f.k}"><span class="cell"><span class="fc" data-tip="1" data-k="${f.k}" data-id="${r.id}" style="background:${hexa(c,.14)};color:${c}">${f.code(r)}${f.k==='esa'&&r.esaSub?'<sup class="subast">*</sup>':''}</span></span></td>`;
+}
 function render(){
   const rows=sortRows(applyFilters());
   $('#nshown').textContent=rows.length.toLocaleString();
   $('#sortlab').innerHTML=st.sortKeys.map(sk=>labelFor(sk.k)+' '+(sk.dir<0?'↓':'↑')).join(' <span style="color:var(--faint)">›</span> ');
   const tb=$('#tbody');const frag=document.createDocumentFragment();
   const maxc=FW.length+1;
+  const cols=visibleColumns();
   for(const [index,r] of rows.entries()){
     const tr=document.createElement('tr');tr.tabIndex=0;
     let cells=`<td class="idx">${index+1}</td><td class="cnt"><div class="cntcell"><span class="cntnum">${r._c}</span><span class="cntbar ${r._c===0?'z':''}" style="width:${Math.max(2,r._c/maxc*46)}px"></span></div></td>`;
     cells+=`<td class="name"><div class="nm">${r.cn||'<i>unnamed</i>'}</div><div class="scinm">${r.sci}</div></td>`;
-    for(const f of FW){
-      if(f.flag(r)){const c=f.colr?f.colr(r):cssv(f.col);
-        cells+=`<td class="fwcell" data-col="${f.k}"><span class="cell"><span class="fc" data-tip="1" data-k="${f.k}" data-id="${r.id}" style="background:${hexa(c,.14)};color:${c}">${f.code(r)}${f.k==='esa'&&r.esaSub?'<sup class="subast">*</sup>':''}</span></span></td>`;
-      } else cells+=`<td class="fwcell" data-col="${f.k}"></td>`;
-      if(f.k==='bcc'){
-        cells+=blmCell(r);
-        cells+=usfsCell(r);
-        cells+=`<td class="fwcell" data-col="stateEsaCount"><span class="cell"><span class="stchip ${!r.stateEsaCount?'z':''}" data-tip="9" data-id="${r.id}">${r.stateEsaCount||0}</span></span></td>`;
-        cells+=sgcnCell(r);
-      }
-      if(f.k==='r2r')cells+=nsCell(r);
-    }
-    cells+=ccsCell(r);
-    cells+=trendCell(r.lt,'lt')+trendCell(r.st,'st');
-    cells+=pgCell(r);
+    for(const c of cols)cells+=c.cell(r);
     tr.innerHTML=cells;
     tr.onclick=()=>openProfile(r);
     tr.onkeydown=e=>{if(e.key==='Enter')openProfile(r);};
@@ -552,6 +1085,9 @@ function nsCell(r){
   const c=nsTierColor(r.nsr);
   return `<td class="nscell"><span class="cell"><span class="nschip" data-tip="8" data-id="${r.id}" style="background:${hexa(c,.14)};color:${c}">${r.nsr}</span></span></td>`;
 }
+function stateEsaCountCell(r){
+  return `<td class="fwcell" data-col="stateEsaCount"><span class="cell"><span class="stchip ${!r.stateEsaCount?'z':''}" data-tip="9" data-id="${r.id}">${r.stateEsaCount||0}</span></span></td>`;
+}
 function sgcnCell(r){
   if(SGCN.flag(r)){const c=cssv(SGCN.col);
     return `<td class="fwcell" data-col="sgcn"><span class="cell"><span class="fc" data-tip="1" data-k="sgcn" data-id="${r.id}" style="background:${hexa(c,.14)};color:${c}">${SGCN.code(r)}</span></span></td>`;
@@ -562,6 +1098,16 @@ function ccsCell(r){
   if(r.ccs==null)return '<td class="fwcell ccscol"></td>';
   const t=Math.max(0,Math.min(1,(r.ccs-4)/16)), wl=r.ccs>=14;
   return `<td class="fwcell ccscol"><span class="cell"><span class="ccschip${wl?' wl':''}" data-tip="2" data-id="${r.id}" style="background:rgba(63,107,78,${(0.05+0.32*t).toFixed(3)})">${r.ccs}</span></span></td>`;
+}
+function tpCell(r){
+  if(r.tp!==1)return '<td class="fwcell" data-col="tp"></td>';
+  const c=tpColor();
+  return `<td class="fwcell" data-col="tp"><span class="cell"><span class="acadchip" data-tip="11" data-id="${r.id}" style="background:${hexa(c,.14)};color:${c}">${tpCode(r.tp)}</span></span></td>`;
+}
+function wlCell(r){
+  if(!r.wl)return '<td class="fwcell" data-col="wl"></td>';
+  const c=wlColor(r.wl);
+  return `<td class="fwcell" data-col="wl"><span class="cell"><span class="acadchip" data-tip="12" data-id="${r.id}" style="background:${hexa(c,.14)};color:${c}">${wlCode(r.wl)}</span></span></td>`;
 }
 function blmCell(r){
   if(!r.blm)return '<td class="blmcell"></td>';
@@ -598,9 +1144,19 @@ function buildStats(){
    <div class="stat gap"><b>${gap}</b><span>Declining · unprotected</span></div>`;
   $('#legend').innerHTML=FW.map(f=>f.k==='r2r'
      ?`<span class="lg"><span class="sw" style="background:${cssv('--r2r-red')}"></span><span class="sw" style="background:${cssv('--r2r-orange')}"></span><span class="sw" style="background:${cssv('--r2r-yellow')}"></span>${f.full} (Red/Orange/Yellow)</span>`
+     :f.k==='water'
+     ?`<span class="lg"><span class="sw" style="background:${waterColor('High')}"></span><span class="sw" style="background:${waterColor('Med')}"></span><span class="sw" style="background:${waterColor('Low')}"></span>${f.full} (cells show total scores; colors indicate High/Med/Low)</span>`
+     :f.k==='waterbird'
+     ?`<span class="lg"><span class="sw" style="background:${waterbirdColor('HI')}"></span><span class="sw" style="background:${waterbirdColor('H')}"></span><span class="sw" style="background:${waterbirdColor('M')}"></span><span class="sw" style="background:${waterbirdColor('L')}"></span><span class="sw" style="background:${waterbirdColor('N')}"></span><span class="sw" style="background:${waterbirdColor('IL')}"></span>${f.full} (HI/H/M/L/N/IL)</span>`
+     :f.k==='pf'
+     ?`<span class="lg"><span class="sw" style="background:${pfColor('R')}"></span><span class="sw" style="background:${pfColor('D')}"></span><span class="sw" style="background:${pfColor('ND')}"></span><span class="sw" style="background:${pfColor('C')}"></span>${f.full} (Red/D/R/C)</span>`
+     :f.k==='shore'
+     ?`<span class="lg"><span class="sw" style="background:${shoreColor('ESA')}"></span><span class="sw" style="background:${shoreColor('Greatest')}"></span><span class="sw" style="background:${shoreColor('High')}"></span><span class="sw" style="background:${shoreColor('Moderate')}"></span><span class="sw" style="background:${shoreColor('Least')}"></span>${f.full} (ESA-listed/Greatest/High/Moderate/Least)</span>`
      :`<span class="lg"><span class="sw" style="background:${cssv(f.col)}"></span>${f.full}</span>`).join('')
    +`<span class="lg"><span class="sw" style="background:${cssv(SGCN.col)}"></span>${SGCN.full}</span>`
    +`<span class="lg"><span class="sw" style="background:${cssv('--fw-wl')}"></span>CCS ≥ 14 = Watch List level</span>`
+   +`<span class="lg"><span class="sw" style="background:${cssv('--fw-tp')}"></span>TP = ACAD Global 2024 Tipping Point species</span>`
+   +`<span class="lg"><span class="sw" style="background:${wlColor('Red')}"></span><span class="sw" style="background:${wlColor('Orange')}"></span><span class="sw" style="background:${wlColor('Yellow')}"></span>WL = ACAD Global 2024 Watch List (R/O/Y)</span>`
    +`<span class="lg"><b style="font-family:var(--mono)">*</b> ESA listing applies only to a subspecies or DPS, not the whole species — hover for details</span>`
    +`<span class="lg" style="margin-left:auto;color:var(--faint)">codes are native status values · hover any cell</span>`;
 }
@@ -646,6 +1202,8 @@ const tip=$('#tooltip');
 document.addEventListener('mouseover',e=>{const el=e.target.closest('[data-tip]');if(!el)return;
   const r=DATA.find(x=>x.id===el.dataset.id);if(!r)return;
   if(el.dataset.tip==='2'){tip.innerHTML=`<b>ACAD Combined Conservation Score</b><br><span class="tw">${r.ccs} of 20</span>${r.ccs>=14?' · <span class="tw">Watch List level</span>':''} · <span class="tw">ACAD 2024</span>`;tip.style.opacity='1';return;}
+  if(el.dataset.tip==='11'){tip.innerHTML=`<b>ACAD Tipping Point</b><br><span class="tw">${escapeHtml(tpTip(r))}</span>`;tip.style.opacity='1';return;}
+  if(el.dataset.tip==='12'){tip.innerHTML=`<b>ACAD Watch List</b><br><span class="tw">${escapeHtml(wlTip(r))}</span>`;tip.style.opacity='1';return;}
   if(el.dataset.tip==='8'){tip.innerHTML=`<b>NatureServe Global Conservation Status Rank</b><br><span class="tw">${r.nsrFull} · ${nsCategoryName(r.nsr)}</span> · <span class="tw">NatureServe Explorer</span>`;tip.style.opacity='1';return;}
   if(el.dataset.tip==='9'){const list=(r.stateEsa||[]).map(it=>`${it.abbr}${it.normalized?' ('+escapeHtml(it.normalized)+')':''}`).join(', ');tip.innerHTML=`<b>State ESA listings</b><br><span class="tw">${r.stateEsaCount||0} state${(r.stateEsaCount||0)===1?'':'s'} or territories in the supplied listing workbook</span>${list?`<br><span class="tw">${list}</span>`:''}`;tip.style.opacity='1';return;}
   if(el.dataset.tip==='10'){tip.innerHTML=`<b>Priority-gap score: ${r.pg}/100</b><br><span class="tw">Threat ${Math.round(threatLevel(r)*100)} − Protection ${Math.round(protectionLevel(r)*100)}</span><br><span class="tw">Threat: IUCN, R2R, CCS, NatureServe, BCC, SGCN</span><br><span class="tw">Protection: federal ESA + state ESA</span><br><span class="tw">Higher = more imperiled relative to its protection.</span>`;tip.style.opacity='1';return;}
@@ -662,11 +1220,20 @@ function escapeHtml(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'
 $('#search').oninput=e=>{st.q=e.target.value;render();pushURLdebounced();};
 $('#minc').oninput=e=>{st.min=+e.target.value;$('#mincval').textContent=st.min;render();pushURLdebounced();};
 $('#usonly').onchange=e=>{st.us=e.target.checked;render();pushURL();};
-$('#reset').onclick=()=>{st.q='';st.groups.clear();st.habs.clear();st.us=true;st.min=0;st.req.clear();st.exc.clear();st.preset=null;st.sortKeys=[{k:'_c',dir:-1}];
+function goHome(){
+  st.q='';st.groups.clear();st.habs.clear();st.us=true;st.min=0;st.req.clear();st.exc.clear();st.preset=null;st.sortKeys=[{k:'_c',dir:-1}];st.hiddenCols.clear();
   $('#search').value='';$('#minc').value=0;$('#mincval').textContent='0';$('#usonly').checked=true;
   document.querySelectorAll('#groups .chip').forEach(c=>c.classList.remove('on'));
   document.querySelectorAll('#habitats .chip').forEach(c=>c.classList.remove('on'));
-  syncFwUI();syncPresetUI();render();pushURL();};
+  syncFwUI();syncPresetUI();buildHead();render();pushURL();
+  closeProfile();
+  $('#sidebar').classList.remove('open');
+  $('.tablewrap').scrollTo({top:0,left:0,behavior:'smooth'});
+  window.scrollTo({top:0,left:0,behavior:'smooth'});
+}
+$('#reset').onclick=goHome;
+$('#hometitle').onclick=goHome;
+$('#hometitle').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();goHome();}};
 $('#export').onclick=exportCSV;
 $('#menubtn').onclick=()=>$('#sidebar').classList.toggle('open');
 $('#scrim').onclick=closeProfile;
@@ -674,10 +1241,10 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeProfile();});
 
 function exportCSV(){
   const rows=sortRows(applyFilters());
-  const head=['common_name','scientific_name','group','habitat','framework_count','ESA','ESA_subspecies_or_DPS_scope','MBTA_protected','CMS','CITES_appendix','BCC','SGCN_jurisdictions','IUCN_2025','IUCN_trend','R2R_alert','ACAD_CCS_max','NatureServe_global_rank','BLM_state_lists','USFS_regions','long_term_BBS_total_change_percent','short_term_BBS_total_change_percent','priority_gap_score'];
+  const head=['common_name','scientific_name','group','habitat','framework_count','ESA','ESA_subspecies_or_DPS_scope','MBTA_protected','CMS','CITES_appendix','BCC','SGCN_jurisdictions','IUCN_2025','IUCN_trend','R2R_alert','waterfowl_plan_2023_ducks_total_score','waterfowl_plan_scope','waterbird_plan_concern','waterbird_plan_distribution','partners_in_flight_2016','shorebird_plan_2016','shorebird_plan_scope','ACAD_CCS_max','ACAD_tipping_point','ACAD_watch_list_category','NatureServe_global_rank','BLM_state_lists','USFS_regions','long_term_BBS_total_change_percent','short_term_BBS_total_change_percent','priority_gap_score'];
   const lines=[head.join(',')];
   for(const r of rows){const f=v=>{v=(v==null?'':String(v));return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;};
-    lines.push([r.cn,r.sci,r.grp,r.hab,r._c,r.esa,(r.esaSub||''),(r.mbta===1?'Yes':''),r.cms,r.cites,(r.bcc==='Yes'?r.bccd:''),(r.sg?r.sgn:''),r.i25,r.itr,r.r2r,(r.ccs==null?'':r.ccs),(r.nsrFull||''),r.blm?r.blm.join('; '):'',r.usfs?r.usfs.join('; '):'',r.lt,r.st,r.pg].map(f).join(','));}
+    lines.push([r.cn,r.sci,r.grp,r.hab,r._c,r.esa,(r.esaSub||''),(r.mbta===1?'Yes':''),r.cms,r.cites,(r.bcc==='Yes'?r.bccd:''),(r.sg?r.sgn:''),r.i25,r.itr,r.r2r,(r.water&&r.water.score!=null?r.water.score:''),(r.water&&r.water.scope?r.water.scope:''),(r.waterbird?waterbirdCode(r.waterbird.level):''),(r.waterbird&&r.waterbird.scope?r.waterbird.scope:''),(r.pf?pfCode(r.pf.level):''),(r.shore?r.shore.level:''),(r.shore&&r.shore.scope?r.shore.scope:''),(r.ccs==null?'':r.ccs),(r.tp===1?'Yes':''),(r.wl||''),(r.nsrFull||''),r.blm?r.blm.join('; '):'',r.usfs?r.usfs.join('; '):'',r.lt,r.st,r.pg].map(f).join(','));}
   const blob=new Blob([lines.join('\n')],{type:'text/csv'});const a=document.createElement('a');
   a.href=URL.createObjectURL(blob);a.download='bird_conservation_view.csv';a.click();
 }
@@ -685,14 +1252,14 @@ function exportCSV(){
 /* ---------- URL state ---------- */
 let urlT;
 function pushURLdebounced(){clearTimeout(urlT);urlT=setTimeout(pushURL,400);}
-function pushURL(){const s={q:st.q,g:[...st.groups],h:[...st.habs],u:st.us?1:0,m:st.min,r:[...st.req],x:[...st.exc],p:st.preset,sk:st.sortKeys};
+function pushURL(){const s={q:st.q,g:[...st.groups],h:[...st.habs],u:st.us?1:0,m:st.min,r:[...st.req],x:[...st.exc],p:st.preset,sk:st.sortKeys,hc:[...st.hiddenCols]};
   history.replaceState(null,'','#'+encodeURIComponent(JSON.stringify(s)));}
 function loadURL(){try{const hh=decodeURIComponent(location.hash.slice(1));if(!hh)return;const s=JSON.parse(hh);
-  st.q=s.q||'';st.groups=new Set(s.g||[]);st.habs=new Set(s.h||[]);st.us=s.u===undefined?true:!!s.u;st.min=s.m||0;st.req=new Set(s.r||[]);st.exc=new Set(s.x||[]);st.preset=s.p||null;st.sortKeys=Array.isArray(s.sk)&&s.sk.length?s.sk:[{k:'_c',dir:-1}];
+  st.q=s.q||'';st.groups=new Set(s.g||[]);st.habs=new Set(s.h||[]);st.us=s.u===undefined?true:!!s.u;st.min=s.m||0;st.req=new Set(s.r||[]);st.exc=new Set(s.x||[]);st.preset=s.p||null;st.sortKeys=Array.isArray(s.sk)&&s.sk.length?s.sk:[{k:'_c',dir:-1}];st.hiddenCols=new Set(s.hc||[]);
   $('#search').value=st.q;$('#minc').value=st.min;$('#mincval').textContent=st.min;$('#usonly').checked=st.us;
   document.querySelectorAll('#groups .chip').forEach(c=>c.classList.toggle('on',st.groups.has(c.dataset.g)));
   document.querySelectorAll('#habitats .chip').forEach(c=>c.classList.toggle('on',st.habs.has(c.dataset.h)));
-  syncFwUI();syncPresetUI();}catch(e){}}
+  syncFwUI();syncPresetUI();buildHead();render();}catch(e){}}
 
 buildSidebar();buildHead();buildStats();loadURL();render();
 </script>
