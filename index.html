@@ -75,7 +75,7 @@ aside{width:264px;flex:none;border-right:1px solid var(--line);background:var(--
 .tablewrap{flex:1;overflow:auto}
 table{border-collapse:separate;border-spacing:0;table-layout:fixed;width:1046px;font-size:12.5px}
 thead th{position:sticky;top:0;z-index:5;background:var(--panel);border-bottom:1px solid var(--line-strong);font-weight:600;color:var(--muted);font-size:11px;letter-spacing:.03em;padding:0;height:32px;vertical-align:bottom}
-.grouphead th{height:22px;top:0;z-index:6;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);font-size:9.5px;font-weight:600;text-align:center;border-bottom:none;padding-top:5px;background:var(--panel);white-space:normal;line-height:1.15;overflow:visible}
+.grouphead th{height:22px;top:0;z-index:6;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);font-size:9.5px;font-weight:600;text-align:center;border-bottom:none;padding:0;vertical-align:middle;background:var(--panel);white-space:normal;line-height:1.15;overflow:visible}
 thead tr.cols th{top:22px}
 th.thc{cursor:pointer;text-align:center;padding:6px 0 7px;user-select:none;height:32px;white-space:nowrap;vertical-align:bottom;font-size:10.5px}
 th.thc .lab{display:inline-block}
@@ -822,8 +822,8 @@ const COLUMN_DEFS=[
  {key:'usfs',section:'Federal',width:38,label:'USFS',title:'Listed in one or more available USFS Regional Forester Sensitive Species bird lists',cell:r=>usfsCell(r)},
  {key:'stateEsaCount',section:'State',width:58,label:'State ESA',title:'Number of states or territories where this species has a state-level endangered or threatened designation in the supplied workbook',cell:r=>stateEsaCountCell(r)},
  {key:'sgcn',section:'State',width:38,label:'SGCN',title:SGCN.full,cell:r=>sgcnCell(r)},
- {key:'cms',section:'International',width:48,label:F_CMS.label,title:F_CMS.full,cell:r=>fwCell(F_CMS,r)},
- {key:'cites',section:'International',width:48,label:F_CITES.label,title:F_CITES.full,cell:r=>fwCell(F_CITES,r)},
+ {key:'cms',section:'International',width:56,label:F_CMS.label,title:F_CMS.full,cell:r=>fwCell(F_CMS,r)},
+ {key:'cites',section:'International',width:56,label:F_CITES.label,title:F_CITES.full,cell:r=>fwCell(F_CITES,r)},
  {key:'iucn',section:'Conservation Status',width:46,label:F_IUCN.label,title:F_IUCN.full,cell:r=>fwCell(F_IUCN,r)},
  {key:'r2r',section:'Conservation Status',width:46,label:F_R2R.label,title:F_R2R.full,cell:r=>fwCell(F_R2R,r)},
  {key:'nsr',section:'Conservation Status',width:52,label:'NS',title:'NatureServe Global Conservation Status Rank (G1 critically imperiled – G5 secure; X/H = presumed/possibly extinct; NR/U = not ranked)',cell:r=>nsCell(r)},
@@ -834,8 +834,8 @@ const COLUMN_DEFS=[
  {key:'waterbird',section:'Plans',width:30,label:F_WATERBIRD.label,title:F_WATERBIRD.full,cell:r=>fwCell(F_WATERBIRD,r)},
  {key:'pf',section:'Plans',width:30,label:F_PF.label,title:F_PF.full,cell:r=>fwCell(F_PF,r)},
  {key:'shore',section:'Plans',width:30,label:F_SHORE.label,title:F_SHORE.full,cell:r=>fwCell(F_SHORE,r)},
- {key:'lt',section:'Population trend',width:58,label:'1966+',title:'BBS Core survey-wide total population change, compounded across the stated 1966–2024-era interval',cell:r=>trendCell(r.lt,'lt')},
- {key:'st',section:'Population trend',width:58,label:'1993+',title:'BBS Expanded survey-wide total population change, compounded from 1993 through 2024',cell:r=>trendCell(r.st,'st')},
+ {key:'lt',section:'Population trend',width:66,label:'1966+',title:'BBS Core survey-wide total population change, compounded across the stated 1966–2024-era interval',cell:r=>trendCell(r.lt,'lt')},
+ {key:'st',section:'Population trend',width:66,label:'1993+',title:'BBS Expanded survey-wide total population change, compounded from 1993 through 2024',cell:r=>trendCell(r.st,'st')},
  {key:'pg',section:'Priority',width:72,label:'Priority gap',title:'Priority-gap score (0–100): combines threat level (IUCN, R2R, ACAD CCS, NatureServe, BCC, SGCN) against protection level (federal ESA + state ESA listings). Higher = more imperiled relative to how little it is currently protected.',cell:r=>pgCell(r)},
 ];
 function visibleColumns(){return COLUMN_DEFS.filter(c=>!st.hiddenCols.has(c.section));}
