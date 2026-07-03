@@ -836,7 +836,7 @@ const COLUMN_DEFS=[
  {key:'shore',section:'Plans',width:30,label:F_SHORE.label,title:F_SHORE.full,cell:r=>fwCell(F_SHORE,r)},
  {key:'lt',section:'Population trend',width:66,label:'1966+',title:'BBS Core survey-wide total population change, compounded across the stated 1966–2024-era interval',cell:r=>trendCell(r.lt,'lt')},
  {key:'st',section:'Population trend',width:66,label:'1993+',title:'BBS Expanded survey-wide total population change, compounded from 1993 through 2024',cell:r=>trendCell(r.st,'st')},
- {key:'pg',section:'Priority',width:72,label:'Priority gap',title:'Priority-gap score (0–100): combines threat level (IUCN, R2R, ACAD CCS, NatureServe, BCC, SGCN) against protection level (federal ESA + state ESA listings). Higher = more imperiled relative to how little it is currently protected.',cell:r=>pgCell(r)},
+ {key:'pg',section:'Priority',width:82,label:'Priority gap',title:'Priority-gap score (0–100): combines threat level (IUCN, R2R, ACAD CCS, NatureServe, BCC, SGCN) against protection level (federal ESA + state ESA listings). Higher = more imperiled relative to how little it is currently protected.',cell:r=>pgCell(r)},
 ];
 function visibleColumns(){return COLUMN_DEFS.filter(c=>!st.hiddenCols.has(c.section));}
 
